@@ -1,6 +1,7 @@
 package com.trello.models;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class List {
 
@@ -12,6 +13,7 @@ public class List {
         return id;
     }
     public List(){
+        this.id = UUID.randomUUID().toString();
         this.cards = new ArrayList<>();
     }
     public void setId(String id) {
