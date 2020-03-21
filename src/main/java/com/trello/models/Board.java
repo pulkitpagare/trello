@@ -3,6 +3,7 @@ package com.trello.models;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Board {
@@ -11,15 +12,15 @@ public class Board {
     @NotBlank(message = "name should not be blank")
     private String boardName;
 
-    private ArrayList<User> members;
+    private HashMap<String, User> members;
 
-    private ArrayList<List> lists;
+    private HashMap<String, List> lists;
 
     public Board(String boardName) {
         this.id = UUID.randomUUID().toString();
         this.boardName = boardName;
-        this.members = new ArrayList<>();
-        this.lists = new ArrayList<>();
+        this.members = new HashMap<>();
+        this.lists = new HashMap<>();
     }
 
     public String getBoardName() {
@@ -30,19 +31,19 @@ public class Board {
         this.boardName = boardName;
     }
 
-    public ArrayList<User> getMembers() {
+    public HashMap<String, User> getMembers() {
         return members;
     }
 
-    public void setMembers(ArrayList<User> members) {
+    public void setMembers(HashMap<String, User> members) {
         this.members = members;
     }
 
-    public ArrayList<List> getLists() {
+    public HashMap<String, List> getLists() {
         return lists;
     }
 
-    public void setLists(ArrayList<List> lists) {
+    public void setLists(HashMap<String, List> lists) {
         this.lists = lists;
     }
 
