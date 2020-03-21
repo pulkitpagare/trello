@@ -39,7 +39,7 @@ public class BoardController {
 
     @PostMapping("/boards/{id}/users")
     public String assignMembersToBoard(@PathVariable String id, @RequestParam String userId){
-        if (UserController.users == null || UserController.users.getOrDefault(userId, null) == null){
+        if (UserController.users == null || !UserController.users.containsKey(userId)){
             return "User doesn't exists";
         } else if (boards.getOrDefault(id, null) == null){
             return "Board doesn't exists";
@@ -52,7 +52,7 @@ public class BoardController {
 
     @PostMapping("/boards/{id}/lists")
     public String assignList(@PathVariable String id){
-        if (boards == null && boards.getOrDefault(id, null) == null){
+        if (boards == null && !boards.containsKey(id)){
             return "Board doesn't exists";
         }
         List list = new List();
@@ -63,15 +63,16 @@ public class BoardController {
 
     @GetMapping("/boards/{id}/lists")
     public HashMap<String, List> getAllList(@PathVariable String id) throws Exception {
-        if (boards == null && boards.getOrDefault(id, null) == null){
+        if (boards == null && !boards.containsKey(id) ){
             throw new Exception("Board with "+id+" doesn't exists");
         }
         return boards.get(id).getLists();
     }
 
-    @PostMapping("/boards/{id}/lists/{list_id}/cards")
+    @PostMapping("/boards/{id}/lists/{listId}/cards")
     public Card getAllList(@PathVariable String id , @PathVariable String listId, @RequestParam String userId) throws Exception {
-        if (boards == null && boards.getOrDefault(id, null) == null){
+
+        if (boards == null && ! boards.containsKey(id)){
             throw new Exception("Board with "+id+" doesn't exists");
         }
         if (!boards.get(id).getLists().containsKey(listId)){
